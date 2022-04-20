@@ -2,7 +2,7 @@ export default class UserServices {
     static getUser() {
         return new Promise(resolve => setTimeout(() => resolve(
             {
-                name: 'Bob',
+                name: 'Real User',
                 age: 34,
             },
         ), 2000));

@@ -1,22 +1,23 @@
-import UserServices from "./UserServices";
+import UserServices from './UserServices';
 
 describe("User Services", () => {
     it("can save all users into local storage", async () => {
-        await UserServices.storeUsersInLocalStorage();
+        await UserServices.storeUserInLocalStorage();
 
-        expect(localStorage.getItem("all_users")).toBeTruthy();
+        expect(localStorage.getItem('user')).toBeTruthy();
     })
 
     it("can save all users into local storage - but now with Mocks!", async () => {
-        UserServices.getAllUsers = jest.fn().mockResolvedValue([{
-            name: "Beatrice",
-            age: 51
-        }])
+        UserServices.getUser = jest.fn().mockResolvedValue({
+            name: 'Beatrice',
+            age: 51,
+        });
 
-        await UserServices.storeUsersInLocalStorage();
+        await UserServices.storeUserInLocalStorage();
 
-        const usersInLocalStorage = JSON.parse(localStorage.getItem("all_users"));
+        const userInLocalStorage = JSON.parse(localStorage.getItem('user'));
 
-        expect(usersInLocalStorage[0]).toEqual(expect.objectContaining({name: "Beatrice"}));
+        expect(userInLocalStorage).
+            toEqual(expect.objectContaining({name: 'Beatrice'}));
     })
 })
